@@ -1,0 +1,6 @@
+framework module Pods_MalandWeather {
+  umbrella header "Pods-MalandWeather-umbrella.h"
+
+  export *
+  module * { export * }
+}
