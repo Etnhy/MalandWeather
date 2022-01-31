@@ -45,29 +45,9 @@ struct WeatherModel: Codable {
     enum CodingKeys: String, CodingKey {
         case main = "main", description, id, lon, lat, weather, coord
     }
-    
-
-//struct WeatherResponse: Codable {
-//    let weathers: [WeatherDayl]
-//}
-
-
-
-
+ 
 
 //{"coord":{"lon":30.5167,"lat":50.4333},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04n"}],"base":"stations","main":{"temp":273.02,"feels_like":273.02,"temp_min":272.2,"temp_max":273.55,"pressure":1008,"humidity":66},"visibility":10000,"wind":{"speed":0.45,"deg":94,"gust":4.02},"clouds":{"all":100},"dt":1643472279,"sys":{"type":2,"id":2003742,"country":"UA","sunrise":1643434645,"sunset":1643467466},"timezone":7200,"id":703448,"name":"Kyiv","cod":200}
 
 
-//struct WeatherAll: Codable {
-//
-//    var main: String
-//    var description: String
-//}
-//
-//struct Temperature: Codable {
-//    var temp: Double
-//}
-//struct Weather: Codable {
-//    var weather: [WeatherAll]
-//
-//}
+
