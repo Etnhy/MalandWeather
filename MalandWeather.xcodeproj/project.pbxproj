@@ -85,10 +85,10 @@
 		601978CD27A16E13008ED9FC /* MalandWeather */ = {
 			isa = PBXGroup;
 			children = (
+				608A2FA027A58E7F000E3FD8 /* SupportedFiles */,
 				608A2FB327A6C0B8000E3FD8 /* Extensions */,
 				608A2FB227A5F507000E3FD8 /* Models */,
-				608A2FA927A59A1D000E3FD8 /* WeatherApis */,
-				608A2FA027A58E7F000E3FD8 /* SupportedFiles */,
+				608A2FA927A59A1D000E3FD8 /* WeatherAPI */,
 				601978D427A16E13008ED9FC /* Main.storyboard */,
 				601978CE27A16E13008ED9FC /* AppDelegate.swift */,
 				601978D027A16E13008ED9FC /* SceneDelegate.swift */,
@@ -135,12 +135,12 @@
 			path = SupportedFiles;
 			sourceTree = "<group>";
 		};
-		608A2FA927A59A1D000E3FD8 /* WeatherApis */ = {
+		608A2FA927A59A1D000E3FD8 /* WeatherAPI */ = {
 			isa = PBXGroup;
 			children = (
 				608A2FAA27A59BE3000E3FD8 /* getWeather.swift */,
 			);
-			path = WeatherApis;
+			path = WeatherAPI;
 			sourceTree = "<group>";
 		};
 		608A2FB227A5F507000E3FD8 /* Models */ = {

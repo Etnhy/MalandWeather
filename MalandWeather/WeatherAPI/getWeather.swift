@@ -17,21 +17,6 @@ class APIManager {
     let twoest = "pro.openweathermap.org/data/2.5/forecast/hourly?q=Киев&appid=9e64db94a738a9d0398f267a443b079c"
   
     
-//    func getWeather(_ completion: @escaping (Result<[String], Error>) -> ()) {
-//        guard let url = URL(string: apik) else {return}
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            if let error = error {
-//                completion(.failure(error))
-//                return
-//            }
-//            if let weather = try? JSONDecoder().decode(WeatherModel.self, from: data!) {
-//                completion(.success(weather))
-//                print(weather)
-//            }
-//        }.resume()
-//
-//    }
-    
     func fetchCurrentWeather(completion: @escaping (Result<WeatherModel, Error>)->()) {
             
         guard let url = URL(string: apik) else {return}
@@ -48,11 +33,5 @@ class APIManager {
             }
             
         }.resume()
-        
-        
-        
     }
-    
-    
-    
 }
