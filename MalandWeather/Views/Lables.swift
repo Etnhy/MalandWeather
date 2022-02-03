@@ -11,41 +11,46 @@ class Lables: UIView {
     
     var dataWeather: [Weather]?
     
-    lazy var nameLabel: UILabel = {                     // name country
-       var name = UILabel()
-        name.translatesAutoresizingMaskIntoConstraints = false
-        name.textColor = .white
-        name.text = "Город"
-        return name
+    let namesViews = ["Температура","Остальное","Ветер"]
+//    let lablesNames
+
+    
+    lazy var lablesView: [UIView] = {
+       var views = [UIView]()
+        for viewName in namesViews.enumerated() {
+            var view = UIView()
+            view.backgroundColor = .white.withAlphaComponent(0.77)
+            view.layer.cornerRadius = 14
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.layer.borderWidth = 1
+            view.layer.borderColor = UIColor.black.withAlphaComponent(0.8).cgColor
+            views.append(view)
+        }
+        
+        return views
     }()
-    lazy var sunsetLabel: UILabel = {               // sunset
-       var sun = UILabel()
-        sun.translatesAutoresizingMaskIntoConstraints = false
-        sun.textColor = .white
-        sun.text = "сан"
-        return sun
+    
+    lazy var stackView: UIStackView = {
+       var stack = UIStackView(arrangedSubviews: lablesView)
+        stack.axis = .vertical
+        stack.spacing = 20
+        stack.distribution = .fillProportionally
+        stack.backgroundColor = .clear
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
-    lazy var tempLable: UILabel = {                 // temperature
-       var temp = UILabel()
-        temp.translatesAutoresizingMaskIntoConstraints = false
-        temp.textColor = .white
-        temp.text = "temp"
-        return temp
+    
+    lazy var lablesToViews: [UILabel] = {
+        var lables = [UILabel]()
+        for labl in namesViews {
+            var view = UILabel()
+            view.backgroundColor = .blue.withAlphaComponent(0.2)
+            view.text = labl
+            lables.append(view)
+        }
+        return lables
     }()
-    lazy var windSpeedLabel: UILabel = {                // wind speed
-       var wind = UILabel()
-        wind.translatesAutoresizingMaskIntoConstraints = false
-        wind.textColor = .white
-        wind.text = "wind"
-        return wind
-    }()
-    lazy var mainLabel: UILabel = {                 // cloud or not
-       var main = UILabel()
-        main.translatesAutoresizingMaskIntoConstraints = false
-        main.textColor = .white
-        main.text = "main"
-        return main
-    }()
+  
   
     
     override init(frame: CGRect) {
@@ -60,33 +65,30 @@ class Lables: UIView {
         super.layoutSubviews()
         setCons()
     }
+    
+    
     //MARK: -  Setups
+    func addPackLables() {
+        
+    }
     func addSub() {
-        self.addSubview(nameLabel)
-        self.addSubview(sunsetLabel)
-        self.addSubview(tempLable)
-        self.addSubview(windSpeedLabel)
-        self.addSubview(mainLabel)
+        self.addSubview(stackView)
+    }
+    func setupView() {
+        
+        
     }
     
     func setCons() {
         NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: self.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-            nameLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: 4),
-            nameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 16),
             
-            sunsetLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4),
-            sunsetLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 16),
             
-            tempLable.topAnchor.constraint(equalTo: sunsetLabel.bottomAnchor,constant: 16),
-            tempLable.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            
-            windSpeedLabel.topAnchor.constraint(equalTo: tempLable.bottomAnchor,constant: 16),
-            windSpeedLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            
-            mainLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor,constant: 16),
-            mainLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-            
+                
         ])
         
     }

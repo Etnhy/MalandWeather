@@ -8,13 +8,12 @@
 import Foundation
 
 
-extension Float {
-//    func kelvinToCelci(_ num: Float) -> Int {
-//        if let float = Float(self) {
-//            let kelvin = 1.8 * (float - 273) + 32
-//            return String(kelvin)
-//        }
-//        
-//        return self
-//    }
+extension String {
+    func formattedMinMax(_ digitsCount: Int = 2) -> String {
+        if let double = Double(self) {
+            let stringDouble = String(format: "%.\(digitsCount)f", double)
+            return stringDouble
+        }
+        return self
+    }
 }
