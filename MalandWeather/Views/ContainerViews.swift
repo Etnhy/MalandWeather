@@ -7,7 +7,18 @@
 
 import UIKit
 
+protocol CoutryChanged: AnyObject {
+    func setCountry(country: UITextField)
+//    func textFieldShouldReturn(textField: UITextField)
+}
+
 class ContainerViews: UIView {
+    
+    
+    weak var countryChanged: CoutryChanged?
+
+    var gorod = Country()
+
 
     lazy var countryNames: UITextField = {
        var field = UITextField()
@@ -17,6 +28,8 @@ class ContainerViews: UIView {
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.black.cgColor
         field.keyboardType = .default
+        field.delegate = self
+        field.addTarget(self, action: #selector(textFieldEditCountry), for: .editingChanged)
         return field
     }()
     lazy var alphaView: UIView = {
@@ -33,6 +46,7 @@ class ContainerViews: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSub()
+        setupView()
 //        setConstraints()
     }
     
@@ -46,10 +60,15 @@ class ContainerViews: UIView {
         
         
     }
+    //MARK: -  Settings
+    
     
     private func addSub() {
         self.addSubview(alphaView)
         self.addSubview(countryNames)
+    }
+    func setupView() {
+//        self.CountryChanged = self
     }
     
     private func setConstraints() {
@@ -65,17 +84,32 @@ class ContainerViews: UIView {
             countryNames.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             countryNames.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             countryNames.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            
-            
-            
-
         ])
+    }
+    //MARK: - Actions
+    @objc func textFieldEditCountry(_ textField: UITextField) {
+        countryChanged?.setCountry(country: textField)
     }
 
 }
 
+extension ContainerViews: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        countryChanged?.setCountry(country: textField)
 
-    
+        if textField == countryNames {
+            gorod.country = textField.text ?? "error"
+//            print(textField.text)
+        }
+
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+
     
     
     

@@ -7,6 +7,9 @@
 
 import Foundation
 
+struct Country {
+    var country = "Kyiv"
+}
 
 struct Weather: Codable {
     let id: Int

@@ -8,5 +8,6 @@ target 'MalandWeather' do
   # Pods for MalandWeather
 pod 'Alamofire'
 pod 'Nuke'
+pod 'iOSDropDown'
 
 end
