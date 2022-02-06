@@ -11,8 +11,8 @@ class Lables: UIView {
     
     var dataWeather: [Weather]?
     
-    let namesViews = ["Температура","Остальное","Ветер"]
-    let windOther = ["dima","poshel","nahui"]
+    private let namesViews = ["Максимальная:","Минимальная:","Ощущается как:"]
+    private let windOther = ["Облачность","1","2"]
     
     
     
@@ -65,7 +65,7 @@ class Lables: UIView {
     }()
     
     lazy var stackSecond: UIStackView = {
-       var stack = UIStackView(arrangedSubviews: lablesOnSecondView)
+        var stack = UIStackView(arrangedSubviews: lablesOnSecondView)
         stack.axis = .vertical
         stack.distribution = .fillProportionally
         stack.spacing = 30
@@ -77,10 +77,10 @@ class Lables: UIView {
     }()
     
     lazy var stackLables: UIStackView = {
-       var stack = UIStackView(arrangedSubviews: lablesToViews)
+        var stack = UIStackView(arrangedSubviews: lablesToViews)
         stack.axis = .vertical
         stack.distribution = .fillProportionally
-        stack.spacing = 30
+        stack.spacing = 20
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +88,7 @@ class Lables: UIView {
         return stack
     }()
     
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -109,30 +109,30 @@ class Lables: UIView {
     
     
     //MARK: -  Setups
-    func addPackLables() {
+    private func addPackLables() {
         lablesView[0].addSubview(stackLables)
         lablesView[1].addSubview(stackSecond)
     }
     
     
-    func addSub() {
+    private func addSub() {
         self.addSubview(stackView)
     }
     
     
     
-    func setCons() {
+    private func setCons() {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-//            stackLables.topAnchor.constraint(equalTo: self.topAnchor),
-//            stackLables.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-//            stackLables.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            stackLables.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-
+            //            stackLables.topAnchor.constraint(equalTo: self.topAnchor),
+            //            stackLables.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            //            stackLables.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            //            stackLables.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            
         ])
         
     }

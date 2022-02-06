@@ -23,6 +23,9 @@
 		608A2FAD27A59C9E000E3FD8 /* StructWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A2FAC27A59C9E000E3FD8 /* StructWeather.swift */; };
 		608A2FB127A5AD12000E3FD8 /* Lables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A2FB027A5AD12000E3FD8 /* Lables.swift */; };
 		608A2FB527A6C0E5000E3FD8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A2FB427A6C0E5000E3FD8 /* Extensions.swift */; };
+		60FE961227B02DE500C04C66 /* ExtensionFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FE961127B02DE500C04C66 /* ExtensionFonts.swift */; };
+		60FE961427B02EB700C04C66 /* LetoTextSansDefect.otf in Resources */ = {isa = PBXBuildFile; fileRef = 60FE961027B02DD700C04C66 /* LetoTextSansDefect.otf */; };
+		60FE961627B0332600C04C66 /* Vokiar.otf in Resources */ = {isa = PBXBuildFile; fileRef = 60FE961527B0332600C04C66 /* Vokiar.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		608A2FAC27A59C9E000E3FD8 /* StructWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructWeather.swift; sourceTree = "<group>"; };
 		608A2FB027A5AD12000E3FD8 /* Lables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lables.swift; sourceTree = "<group>"; };
 		608A2FB427A6C0E5000E3FD8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		60FE961027B02DD700C04C66 /* LetoTextSansDefect.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LetoTextSansDefect.otf; sourceTree = "<group>"; };
+		60FE961127B02DE500C04C66 /* ExtensionFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFonts.swift; sourceTree = "<group>"; };
+		60FE961527B0332600C04C66 /* Vokiar.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vokiar.otf; sourceTree = "<group>"; };
 		DD7AEDF452AF4577D54756AA /* Pods-MalandWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MalandWeather.debug.xcconfig"; path = "Target Support Files/Pods-MalandWeather/Pods-MalandWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		E684B72118DD40297BF30AAC /* Pods_MalandWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MalandWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -135,6 +141,7 @@
 		608A2FA027A58E7F000E3FD8 /* SupportedFiles */ = {
 			isa = PBXGroup;
 			children = (
+				60FE960F27B02DC500C04C66 /* fonts */,
 				6057BCB527A8210B0002568F /* Pictures */,
 			);
 			path = SupportedFiles;
@@ -163,6 +170,16 @@
 				60476E8C27AC56D100C2A98A /* FieldExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		60FE960F27B02DC500C04C66 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				60FE961027B02DD700C04C66 /* LetoTextSansDefect.otf */,
+				60FE961527B0332600C04C66 /* Vokiar.otf */,
+				60FE961127B02DE500C04C66 /* ExtensionFonts.swift */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		6BB6FDD9A5B7FF5C72CC7054 /* Pods */ = {
@@ -237,6 +254,8 @@
 				608A2F9F27A58E7B000E3FD8 /* weather.jpeg in Resources */,
 				601978DB27A16E14008ED9FC /* LaunchScreen.storyboard in Resources */,
 				601978D827A16E14008ED9FC /* Assets.xcassets in Resources */,
+				60FE961627B0332600C04C66 /* Vokiar.otf in Resources */,
+				60FE961427B02EB700C04C66 /* LetoTextSansDefect.otf in Resources */,
 				601978D627A16E13008ED9FC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,6 +315,7 @@
 				608A2FAB27A59BE3000E3FD8 /* getWeather.swift in Sources */,
 				608A2FAD27A59C9E000E3FD8 /* StructWeather.swift in Sources */,
 				601978CF27A16E13008ED9FC /* AppDelegate.swift in Sources */,
+				60FE961227B02DE500C04C66 /* ExtensionFonts.swift in Sources */,
 				608A2FB127A5AD12000E3FD8 /* Lables.swift in Sources */,
 				601978D127A16E13008ED9FC /* SceneDelegate.swift in Sources */,
 				608A2F9B27A58A69000E3FD8 /* ContainerViews.swift in Sources */,

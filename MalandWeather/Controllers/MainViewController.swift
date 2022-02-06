@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
         return view
     }()
     
-    lazy var imager: UIImageView = {
+    let imager: UIImageView = {
        var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "weather.jpeg")
@@ -37,20 +37,22 @@ class MainViewController: UIViewController {
     lazy var lableContry: UILabel = {
        var lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
-        lable.text = "Название города"
-        lable.attributedText = NSAttributedString(string: "Город",attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 36, weight: .bold)])
+        lable.numberOfLines = 0
+
+        lable.attributedText = NSAttributedString(string: "Город",attributes: [NSAttributedString.Key.font : UIFont.LetoTextSansDefect(ofSize: 32)])
         lable.textAlignment = .center
+        lable.textColor = .black
         return lable
         
     }()
     
-    lazy var stackInfo: Lables = {
+    let stackInfo: Lables = {
         var view = Lables()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var refreshButton: UIButton  = {
+    let refreshButton: UIButton  = {
        var button = UIButton()
         button.setAttributedTitle(NSAttributedString(string: "Клац", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold)]), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +76,7 @@ class MainViewController: UIViewController {
         
     }
     
+    //MARK: -  Settings
     
     private func configureView() {
         self.view.backgroundColor = .gray
@@ -120,6 +123,8 @@ class MainViewController: UIViewController {
 //        fetch()
         fetchTwo()
     }
+    //MARK: - start fetch
+
 
 }
 //MARK: - FETCH
@@ -136,7 +141,7 @@ extension MainViewController {
                         self.stackInfo.lablesToViews[0].text = "Максимальная: " + String(response.main.temp_max - 273).formattedMinMax(1) + " ℃"
                         self.stackInfo.lablesToViews[1].text = "Минимальная: " + String(response.main.temp_min - 273).formattedMinMax(1) + " ℃"
                         self.stackInfo.lablesToViews[2].text = "Ощущается как: " + String(response.main.feels_like - 273).formattedMinMax(0) + " ℃"
-                        self.stackInfo.lablesOnSecondView[0].text = "\(response.weather[0].description)"
+//                        self.stackInfo.lablesOnSecondView[0].text = "\(response.weather[0].description)"
                         
                     }
                 case .failure(let error):
@@ -151,7 +156,7 @@ extension MainViewController {
                 case .success(let response):
                     print(response)
                     DispatchQueue.main.async {
-                        self.lableContry.text = "\(response.name!)"
+                        self.lableContry.text = "В городе \(response.name!) сейчас \(response.weather[0].description) "
                         self.stackInfo.lablesToViews[0].text = "Максимальная: " + String(response.main.temp_max - 273).formattedMinMax(1) + " ℃"
                         self.stackInfo.lablesToViews[1].text = "Минимальная: " + String(response.main.temp_min - 273).formattedMinMax(1) + " ℃"
                         self.stackInfo.lablesToViews[2].text = "Ощущается как: " + String(response.main.feels_like - 273).formattedMinMax(0) + " ℃"

@@ -16,7 +16,7 @@ class APIManager {
     
     
     //MARK: - get 1
-    func fetchCurrentWeather(country: String,completion: @escaping (Result<WeatherModel, Error>)->()) {
+   public func fetchCurrentWeather(country: String,completion: @escaping (Result<WeatherModel, Error>)->()) {
                 
         let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q=\(country)&appid=9e64db94a738a9d0398f267a443b079c&lang=ru"
         
@@ -36,7 +36,7 @@ class APIManager {
     }
     
     //MARK: - AF get
-    func getWeather(city: String = "Kyiv",comppletion: @escaping (Result<WeatherModel, AFError>)-> Void) {
+   public func getWeather(city: String = "Kyiv",comppletion: @escaping (Result<WeatherModel, AFError>)-> Void) {
         let mainUrl = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=9e64db94a738a9d0398f267a443b079c&lang=ru"
 
         guard let url = URL(string: mainUrl) else {return}
@@ -52,7 +52,7 @@ class APIManager {
                     guard let json = try? JSONDecoder().decode(WeatherModel.self, from: responseJSON.data!) else {return}
                     comppletion(.success(json))
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                     comppletion(.failure(error))
             }
         }
