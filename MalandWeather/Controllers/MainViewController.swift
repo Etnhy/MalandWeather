@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 
 
@@ -14,14 +15,9 @@ class MainViewController: UIViewController {
     var dataWeather = [WeatherModel]()
     var countryWeather: String = ""
 
+
     
-//    lazy var textFieldCountries: ContainerViews = {
-//        var view = ContainerViews()
-//
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-    lazy var textFieldCountries: DropDownView = {
+    lazy var dropDownList: DropDownView = {
         var view = DropDownView()
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -69,9 +65,10 @@ class MainViewController: UIViewController {
         configureView()
         addSubviews()
         setCons()
-        fetch()
+//        fetch()  //
+        fetchTwo() // get with Alamofire
         
-        textFieldCountries.dropDown.didSelect { selectedText, index, id in
+        dropDownList.dropDown.didSelect { selectedText, index, id in
             self.countryWeather = selectedText
         }
         
@@ -84,20 +81,21 @@ class MainViewController: UIViewController {
     
     private func addSubviews() {
         view.addSubview(imager)
-        view.addSubview(textFieldCountries)
+        view.addSubview(dropDownList)
         view.addSubview(lableContry)
         view.addSubview(stackInfo)
         view.addSubview(refreshButton)
 
     }
+    //MARK: - Constraints
     private func setCons() {
         NSLayoutConstraint.activate([
-            textFieldCountries.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            textFieldCountries.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            textFieldCountries.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            textFieldCountries.heightAnchor.constraint(equalToConstant: 64),
+            dropDownList.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            dropDownList.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            dropDownList.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            dropDownList.heightAnchor.constraint(equalToConstant: 64),
             
-            lableContry.topAnchor.constraint(equalTo: textFieldCountries.bottomAnchor, constant: 70),
+            lableContry.topAnchor.constraint(equalTo: dropDownList.bottomAnchor, constant: 70),
             lableContry.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             lableContry.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
@@ -111,20 +109,20 @@ class MainViewController: UIViewController {
             imager.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imager.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            refreshButton.topAnchor.constraint(equalTo: textFieldCountries.topAnchor, constant: 70),
-            refreshButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20)
+            refreshButton.topAnchor.constraint(equalTo: dropDownList.bottomAnchor, constant: 20),
+            refreshButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
+            
         ])
-
     }
     
     //MARK: - Actions
     @objc func tapButton(_ sender: UIButton) {
-        let con = Country().country
-        print(con)
-        fetch()
+//        fetch()
+        fetchTwo()
     }
 
 }
+//MARK: - FETCH
 
 extension MainViewController {
     func fetch() {
@@ -135,13 +133,34 @@ extension MainViewController {
                     print(response)
                     DispatchQueue.main.async {
                         self.lableContry.text = response.name
-                        self.stackInfo.lablesToViews[0].text = "Максимальная: \(response.main.temp_max - 273).C"
-                        self.stackInfo.lablesToViews[1].text = "Минимальная: \(response.main.temp_min - 273).C"
-                        self.stackInfo.lablesToViews[2].text = "Ощущается как: \(response.main.feels_like - 273).C"
+                        self.stackInfo.lablesToViews[0].text = "Максимальная: " + String(response.main.temp_max - 273).formattedMinMax(1) + " ℃"
+                        self.stackInfo.lablesToViews[1].text = "Минимальная: " + String(response.main.temp_min - 273).formattedMinMax(1) + " ℃"
+                        self.stackInfo.lablesToViews[2].text = "Ощущается как: " + String(response.main.feels_like - 273).formattedMinMax(0) + " ℃"
+                        self.stackInfo.lablesOnSecondView[0].text = "\(response.weather[0].description)"
                         
                     }
                 case .failure(let error):
                     print(error)
+            }
+        }
+    }
+    
+    func fetchTwo() {
+        APIManager.shared.getWeather(city: countryWeather) { result in
+            switch result {
+                case .success(let response):
+                    print(response)
+                    DispatchQueue.main.async {
+                        self.lableContry.text = "\(response.name!)"
+                        self.stackInfo.lablesToViews[0].text = "Максимальная: " + String(response.main.temp_max - 273).formattedMinMax(1) + " ℃"
+                        self.stackInfo.lablesToViews[1].text = "Минимальная: " + String(response.main.temp_min - 273).formattedMinMax(1) + " ℃"
+                        self.stackInfo.lablesToViews[2].text = "Ощущается как: " + String(response.main.feels_like - 273).formattedMinMax(0) + " ℃"
+                        self.stackInfo.lablesOnSecondView[0].text = "\(response.weather[0].description)"
+
+
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
             }
         }
     }

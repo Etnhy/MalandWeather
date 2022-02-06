@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (5.5.0)
+  - iOSDropDown (0.3.4)
   - Nuke (10.6.1)
 
 DEPENDENCIES:
   - Alamofire
+  - iOSDropDown
   - Nuke
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - iOSDropDown
     - Nuke
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
   Nuke: 3ca210aee6d90756605c5125cbe40569fd9c06f7
 
-PODFILE CHECKSUM: 4453dec4f629e2b80af2f107ef37a07323ff9b12
+PODFILE CHECKSUM: 1961eeeb7d8249d49ee69aab2c9960b50646f33f
 
 COCOAPODS: 1.11.2

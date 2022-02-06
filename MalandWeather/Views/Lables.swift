@@ -47,6 +47,7 @@ class Lables: UIView {
         for labl in namesViews {
             var view = UILabel()
             view.text = labl
+            view.textColor = .black
             
             lables.append(view)
         }
@@ -57,6 +58,7 @@ class Lables: UIView {
         for labl in windOther {
             var view = UILabel()
             view.text = labl
+            view.textColor = .black
             lables.append(view)
         }
         return lables

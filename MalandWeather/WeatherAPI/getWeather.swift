@@ -12,10 +12,10 @@ class APIManager {
     
     static let shared = APIManager()
     
-//    var gorod = Country()
-
     let apik = "https://api.openweathermap.org/data/2.5/weather?q=Kyiv&appid=9e64db94a738a9d0398f267a443b079c"
     
+    
+    //MARK: - get 1
     func fetchCurrentWeather(country: String,completion: @escaping (Result<WeatherModel, Error>)->()) {
                 
         let baseUrl = "https://api.openweathermap.org/data/2.5/weather?q=\(country)&appid=9e64db94a738a9d0398f267a443b079c&lang=ru"
@@ -33,6 +33,30 @@ class APIManager {
             }
             
         }.resume()
+    }
+    
+    //MARK: - AF get
+    func getWeather(city: String = "Kyiv",comppletion: @escaping (Result<WeatherModel, AFError>)-> Void) {
+        let mainUrl = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=9e64db94a738a9d0398f267a443b079c&lang=ru"
+
+        guard let url = URL(string: mainUrl) else {return}
+        
+        AF.request(url, method: .get,encoding: JSONEncoding.default, headers: ["Accept":"application/json"], requestModifier: {
+            urlRequest in
+            urlRequest.timeoutInterval = 10
+        }).validate(statusCode: 200..<201).responseJSON { (responseJSON) in
+            switch responseJSON.result {
+                case .success(let response):
+                    guard let response = response as? [String:Any] else {return}
+                    print(response)
+                    guard let json = try? JSONDecoder().decode(WeatherModel.self, from: responseJSON.data!) else {return}
+                    comppletion(.success(json))
+                case .failure(let error):
+                    print(error)
+                    comppletion(.failure(error))
+            }
+        }
+ 
     }
 }
 

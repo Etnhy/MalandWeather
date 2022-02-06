@@ -7,9 +7,7 @@
 
 import Foundation
 
-struct Country {
-    var country = "Kyiv"
-}
+
 
 struct Weather: Codable {
     let id: Int
@@ -46,7 +44,7 @@ struct WeatherModel: Codable {
 
     
     enum CodingKeys: String, CodingKey {
-        case main = "main", description, id, lon, lat, weather, coord
+        case main = "main", description = "description", id = "id", lon, lat, weather = "weather", coord
     }
  
 
