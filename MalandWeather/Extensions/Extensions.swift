@@ -21,13 +21,3 @@ extension String {
 
 //MARK: -  ARRAY Extension
 
-extension Array {
-    func findIndexes(arr: [String]) -> [Int] {
-        let indexes = arr.enumerated().filter {
-            $0.element == $0.element
-        }.map{$0.offset}
-        
-        print(indexes)
-        return indexes
-    }
-}

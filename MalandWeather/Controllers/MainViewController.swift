@@ -12,14 +12,13 @@ import Nuke
 
 class MainViewController: UIViewController {
     
-    var dataWeather = [WeatherModel]()
+    
     var countryWeather: String = ""
-
+    
 
     
     lazy var dropDownList: DropDownView = {
         var view = DropDownView()
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -53,11 +52,19 @@ class MainViewController: UIViewController {
     }()
     
     let refreshButton: UIButton  = {
-       var button = UIButton()
-        button.setAttributedTitle(NSAttributedString(string: "Клац", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold)]), for: .normal)
+        var button = UIButton(type: .system)
+        button.setAttributedTitle(NSAttributedString(string: "Клац", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold),
+                                                                                  NSAttributedString.Key.foregroundColor: UIColor.black]), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
         return button
+    }()
+    
+    let buttonGenerateCat: GenerateCatButton = {
+       var view = GenerateCatButton()
+        view.generateCatButton.addTarget(self, action: #selector(buttonActionCats(_:)), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
 
@@ -67,12 +74,16 @@ class MainViewController: UIViewController {
         configureView()
         addSubviews()
         setCons()
-//        fetch()  //
-        fetchTwo() // get with Alamofire
         
+
+        fetchTwo() // get with Alamofire
+        fetchCat()
         dropDownList.dropDown.didSelect { selectedText, index, id in
             self.countryWeather = selectedText
         }
+        
+
+        
         
     }
     
@@ -88,6 +99,7 @@ class MainViewController: UIViewController {
         view.addSubview(lableContry)
         view.addSubview(stackInfo)
         view.addSubview(refreshButton)
+        view.addSubview(buttonGenerateCat)
 
     }
     //MARK: - Constraints
@@ -105,7 +117,7 @@ class MainViewController: UIViewController {
             stackInfo.topAnchor.constraint(equalTo: lableContry.bottomAnchor,constant: 44),
             stackInfo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackInfo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackInfo.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -94),
+//            stackInfo.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -94),
             
             imager.topAnchor.constraint(equalTo: view.topAnchor,constant: 0),
             imager.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
@@ -115,57 +127,41 @@ class MainViewController: UIViewController {
             refreshButton.topAnchor.constraint(equalTo: dropDownList.bottomAnchor, constant: 20),
             refreshButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
             
+            buttonGenerateCat.topAnchor.constraint(equalTo: dropDownList.bottomAnchor, constant: 20),
+            buttonGenerateCat.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
         ])
     }
     
     //MARK: - Actions
     @objc func tapButton(_ sender: UIButton) {
-//        fetch()
         fetchTwo()
     }
-    //MARK: - start fetch
+    
+    @objc func buttonActionCats(_ sender: UIButton) {
+        fetchCat()
+    }
 
 
 }
 //MARK: - FETCH
 
 extension MainViewController {
-    func fetch() {
-
-        APIManager.shared.fetchCurrentWeather(country: countryWeather) { result in
-            switch result {
-                case .success(let response):
-                    print(response)
-                    DispatchQueue.main.async {
-                        self.lableContry.text = response.name
-                        self.stackInfo.lablesToViews[0].text = "Максимальная: " + String(response.main.temp_max - 273).formattedMinMax(1) + " ℃"
-                        self.stackInfo.lablesToViews[1].text = "Минимальная: " + String(response.main.temp_min - 273).formattedMinMax(1) + " ℃"
-                        self.stackInfo.lablesToViews[2].text = "Ощущается как: " + String(response.main.feels_like - 273).formattedMinMax(0) + " ℃"
-//                        self.stackInfo.lablesOnSecondView[0].text = "\(response.weather[0].description)"
-                        
-                    }
-                case .failure(let error):
-                    print(error)
-            }
-        }
-    }
-    
     func fetchTwo() {
         APIManager.shared.getWeather(city: countryWeather) { result in
             switch result {
                 case .success(let response):
-                    print(response)
                     DispatchQueue.main.async {
                         self.lableContry.text = "В городе \(response.name!) сейчас \(response.weather[0].description) "
                         self.stackInfo.lablesToViews[0].text = "Максимальная: " + String(response.main.temp_max - 273).formattedMinMax(1) + " ℃"
                         self.stackInfo.lablesToViews[1].text = "Минимальная: " + String(response.main.temp_min - 273).formattedMinMax(1) + " ℃"
                         self.stackInfo.lablesToViews[2].text = "Ощущается как: " + String(response.main.feels_like - 273).formattedMinMax(0) + " ℃"
-                        self.stackInfo.lablesOnSecondView[0].text = "\(response.weather[0].description)"
 
 
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    print(" не то пальто  \(error.localizedDescription)")
+                    
             }
         }
     }
@@ -173,7 +169,22 @@ extension MainViewController {
 }
 
 
-    
+extension MainViewController {
+    func fetchCat() {
+        GetCatJoke.shared.getCat { result in
+            switch result {
+                case .success(let suc):
+//                    print(suc[0].url)
+                    DispatchQueue.main.async {
+                        Nuke.loadImage(with: suc[0].url, into: self.stackInfo.imageCaats)
+                    }
+                    
+                case .failure(let error):
+                    print(error)
+            }
+        }
+    }
+}
 
 
     

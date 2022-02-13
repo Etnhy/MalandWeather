@@ -26,7 +26,7 @@ class DropDownView: UIView {
         drop.checkMarkEnabled = false
         drop.arrowSize = 12
         drop.selectedRowColor = .blue.withAlphaComponent(0.3)
-        drop.rowBackgroundColor = .white.withAlphaComponent(0.3)
+        drop.rowBackgroundColor = .white
         drop.translatesAutoresizingMaskIntoConstraints = false
         return drop
     }()
