@@ -174,7 +174,6 @@ extension MainViewController {
         GetCatJoke.shared.getCat { result in
             switch result {
                 case .success(let suc):
-//                    print(suc[0].url)
                     DispatchQueue.main.async {
                         Nuke.loadImage(with: suc[0].url, into: self.stackInfo.imageCaats)
                     }

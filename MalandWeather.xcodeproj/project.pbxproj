@@ -113,17 +113,10 @@
 		6057BCB527A8210B0002568F /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				6085466527B87F0300B36325 /* errorpic.png */,
 				608A2F9E27A58E7B000E3FD8 /* weather.jpeg */,
 			);
 			path = Pictures;
-			sourceTree = "<group>";
-		};
-		6085466927B9426200B36325 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				6085466527B87F0300B36325 /* errorpic.png */,
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 		608A2F9C27A58E1A000E3FD8 /* Controllers */ = {
@@ -150,7 +143,6 @@
 			children = (
 				601978D027A16E13008ED9FC /* SceneDelegate.swift */,
 				601978CE27A16E13008ED9FC /* AppDelegate.swift */,
-				6085466927B9426200B36325 /* images */,
 				60FE960F27B02DC500C04C66 /* fonts */,
 				6057BCB527A8210B0002568F /* Pictures */,
 			);
