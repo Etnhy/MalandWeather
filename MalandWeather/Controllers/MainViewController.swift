@@ -117,7 +117,6 @@ class MainViewController: UIViewController {
             stackInfo.topAnchor.constraint(equalTo: lableContry.bottomAnchor,constant: 44),
             stackInfo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackInfo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            stackInfo.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -94),
             
             imager.topAnchor.constraint(equalTo: view.topAnchor,constant: 0),
             imager.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
